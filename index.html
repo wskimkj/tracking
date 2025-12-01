@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>배송 조회</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      background: #f3f4f6;
+      padding: 32px;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1440px;
+      background: #ffffff;
+      padding: 24px 24px 24px;
+      border-radius: 24px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.15);
+      display: flex;
+      gap: 24px;
+      min-height: 600px; /* 전체 레이아웃 세로를 파란 영역만큼 크게 확장 */
+    }
+
+    /* 왼쪽 폼 영역 */
+    .form-area {
+      width: 360px;
+      flex-shrink: 0;
+    }
+
+    /* 오른쪽 결과 영역 */
+    .result-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    h2 {
+      margin-top: 0;
+      margin-bottom: 4px;
+      font-size: 22px;
+    }
+
+    .subtitle {
+      margin: 0 0 16px;
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    label {
+      font-weight: 600;
+      margin-bottom: 6px;
+      display: block;
+      font-size: 13px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 8px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      font-size: 15px;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #4b7bec;
+      box-shadow: 0 0 0 1px rgba(75, 123, 236, 0.3);
+    }
+
+    button.main-btn {
+      width: 100%;
+      padding: 11px;
+      background: linear-gradient(135deg, #4b7bec, #6366f1);
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      font-size: 15px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-top: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+    }
+
+    button.main-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px rgba(79, 70, 229, 0.4);
+    }
+
+    button.main-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 8px 18px rgba(79, 70, 229, 0.25);
+    }
+
+    .error {
+      color: #b91c1c;
+      font-size: 12px;
+      margin-top: 8px;
+    }
+
+    .carrier-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+
+    .carrier-pill {
+      flex: 0 0 auto;
+      border-radius: 999px;
+      border: 1px solid #e5e7eb;
+      padding: 6px 12px;
+      font-size: 11px;
+      background: #f9fafb;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      color: #4b5563;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .carrier-pill span.icon {
+      font-size: 13px;
+    }
+
+    .carrier-pill.active {
+      background: #4b7bec;
+      color: #eff6ff;
+      border-color: #4b7bec;
+      box-shadow: 0 6px 16px rgba(75, 123, 236, 0.35);
+    }
+
+    .carrier-pill:hover {
+      transform: translateY(-1px);
+    }
+
+    .hint-text {
+      font-size: 11px;
+      color: #9ca3af;
+      margin: 2px 0 0;
+    }
+
+    .result-card {
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at top left, #f9fafb, #eef2ff 40%, #f3f4f6 100%);
+      border-radius: 18px;
+      border: 1px solid #e5e7eb;
+      padding: 14px 14px 10px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .result-header {
+      font-size: 13px;
+      color: #4b5563;
+      margin-bottom: 10px;
+    }
+
+    .result-header span.em {
+      font-weight: 600;
+    }
+
+    /* iframe 래퍼: 더 크고 세로 2배 길게 */
+    .frame-wrapper {
+      position: relative;
+      flex: 1;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #111827;
+      min-height: 900px; /* 세로 2배 느낌으로 길게 */
+    }
+
+    /* 내부 페이지 축소해서 보여주기 (줌아웃 효과) */
+    .frame-scale {
+      width: 125%;
+      height: 125%;
+      border: none;
+      background: #111827;
+      transform: scale(0.8);
+      transform-origin: top left;
+    }
+
+    @media (max-width: 960px) {
+      .container {
+        flex-direction: column;
+      }
+      .form-area {
+        width: 100%;
+        max-width: 480px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 16px; }
+      .container { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 왼쪽: 입력 폼 -->
+    <div class="form-area">
+      <h2>배송 조회</h2>
+      <p class="subtitle">택배사와 운송장 번호를 입력하면, 오른쪽 영역에서 바로 조회 화면을 볼 수 있어요.</p>
+
+      <label>택배사 선택</label>
+      <div class="carrier-row" id="carrierRow">
+        <button class="carrier-pill active"
+                data-short="CJ"
+                data-full="CJ대한통운"
+                data-url="https://trace.cjlogistics.com/next/tracking.html?wblNo=">
+          <span class="icon">📦</span>
+          CJ
+        </button>
+        <button class="carrier-pill"
+                data-short="로젠"
+                data-full="로젠택배"
+                data-url="https://www.ilogen.com/web/personal/trace/">
+          <span class="icon">📮</span>
+          로젠
+        </button>
+        <button class="carrier-pill"
+                data-short="한진"
+                data-full="한진택배"
+                data-url="https://www.hanjin.com/kor/CMS/DeliveryMgr/WaybillResult.do?mCode=MN038&schLang=KR&wblnumText2=">
+          <span class="icon">🚚</span>
+          한진
+        </button>
+        <button class="carrier-pill"
+                data-short="우체국"
+                data-full="우체국택배"
+                data-url="https://service.epost.go.kr/trace.RetrieveDomRigiTraceList.comm?sid1=">
+          <span class="icon">🏤</span>
+          우체국
+        </button>
+      </div>
+
+      <label for="tracking">운송장 번호</label>
+      <input type="text" id="tracking" placeholder="운송장 번호를 입력하세요 (숫자만)" />
+      <p class="hint-text">예: 123456789012 (Enter 키로도 조회 가능)</p>
+
+      <button class="main-btn" onclick="track()">
+        <span>조회하기</span>
+      </button>
+
+      <p id="error" class="error" style="display:none;"></p>
+    </div>
+
+    <!-- 오른쪽: 결과 영역 -->
+    <div class="result-area">
+      <div class="result-card">
+        <div id="resultHeader" class="result-header">
+          아직 조회 전입니다. 운송장 번호를 입력한 뒤 왼쪽의 <span class="em">조회하기</span> 버튼을 눌러주세요.
+        </div>
+        <div id="frameWrapper" class="frame-wrapper">
+          <iframe id="resultFrame" class="frame-scale"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const carrierRow    = document.getElementById('carrierRow');
+    const errorEl       = document.getElementById('error');
+    const resultHeader  = document.getElementById('resultHeader');
+    const resultFrame   = document.getElementById('resultFrame');
+    const trackingInput = document.getElementById('tracking');
+
+    // 택배사 선택
+    carrierRow.addEventListener('click', (e) => {
+      const btn = e.target.closest('.carrier-pill');
+      if (!btn) return;
+      document.querySelectorAll('.carrier-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+
+    function validateTracking(num) {
+      const onlyDigits = num.replace(/\s+/g, '');
+      if (!onlyDigits) {
+        return '운송장 번호를 입력해주세요.';
+      }
+      if (!/^\d{8,15}$/.test(onlyDigits)) {
+        return '운송장 번호는 숫자 8~15자리로 입력해주세요.';
+      }
+      return '';
+    }
+
+    function getSelectedCarrier() {
+      return document.querySelector('.carrier-pill.active');
+    }
+
+    function track() {
+      errorEl.style.display = 'none';
+
+      const raw = trackingInput.value.trim();
+      const errMsg = validateTracking(raw);
+      if (errMsg) {
+        errorEl.textContent = errMsg;
+        errorEl.style.display = 'block';
+        resultHeader.textContent = '입력값을 다시 확인해주세요.';
+        resultFrame.src = '';
+        return;
+      }
+
+      const onlyDigits = raw.replace(/\s+/g, '');
+      const carrierBtn = getSelectedCarrier();
+      if (!carrierBtn) {
+        errorEl.textContent = '택배사를 선택해주세요.';
+        errorEl.style.display = 'block';
+        resultHeader.textContent = '택배사를 선택한 뒤 다시 조회해 주세요.';
+        resultFrame.src = '';
+        return;
+      }
+
+      const fullName = carrierBtn.dataset.full;
+      const baseUrl  = carrierBtn.dataset.url;
+      const fullUrl  = baseUrl + encodeURIComponent(onlyDigits);
+
+      resultHeader.innerHTML = `<span class="em">${fullName}</span> 배송 조회 화면입니다. 아래에서 바로 확인할 수 있어요.`;
+
+      // iframe에 해당 택배사 조회 페이지 로드
+      resultFrame.src = fullUrl;
+    }
+
+    // Enter 키로도 조회
+    trackingInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        track();
+      }
+    });
+  </script>
+</body>
+</html>
