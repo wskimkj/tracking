@@ -8,8 +8,8 @@
     * { box-sizing: border-box; }
 
     body {
-      font-family:  'Pretendard',-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-      background: #f3f4f6;
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: #e8f3ff; /* 파스텔 하늘색 톤 */
       padding: 32px;
       margin: 0;
       display: flex;
@@ -20,12 +20,13 @@
       width: 100%;
       max-width: 1000px;
       background: #ffffff;
-      padding: 24px 24px 24px;
-      border-radius: 24px;
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.15);
+      padding: 26px 28px;
+      border-radius: 28px;
+      box-shadow: 0 16px 40px rgba(91, 159, 255, 0.25); /* 파스텔 블루 그림자 */
       display: flex;
-      gap: 24px;
-      min-height: 140px; /* 전체 레이아웃 세로를 파란 영역만큼 크게 확장 */
+      gap: 28px;
+      min-height: 140px;
+      border: 1px solid rgba(160, 200, 255, 0.4); /* 파스텔 테두리 */
     }
 
     /* 왼쪽 폼 영역 */
@@ -45,6 +46,8 @@
       margin-top: 0;
       margin-bottom: 4px;
       font-size: 22px;
+      color: #3677d7;
+      font-weight: 700;
     }
 
     .subtitle {
@@ -55,30 +58,34 @@
 
     label {
       font-weight: 600;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       display: block;
       font-size: 13px;
+      color: #3a4b61;
     }
 
     input {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       margin-bottom: 8px;
-      border: 1px solid #d1d5db;
-      border-radius: 10px;
+      border: 1px solid #cfe5ff;
+      border-radius: 12px;
       font-size: 15px;
+      background: #f7fbff;
+      transition: 0.2s ease;
     }
 
     input:focus {
       outline: none;
-      border-color: #4b7bec;
-      box-shadow: 0 0 0 1px rgba(75, 123, 236, 0.3);
+      border-color: #7db7ff;
+      box-shadow: 0 0 0 2px rgba(125, 183, 255, 0.35);
+      background: #ffffff;
     }
 
     button.main-btn {
       width: 100%;
-      padding: 11px;
-      background: linear-gradient(135deg, #4b7bec, #6366f1);
+      padding: 12px;
+      background: linear-gradient(135deg, #77b6ff, #9ac8ff);
       color: #fff;
       border: none;
       border-radius: 999px;
@@ -90,22 +97,22 @@
       align-items: center;
       justify-content: center;
       gap: 6px;
-      box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
+      box-shadow: 0 10px 25px rgba(120, 170, 255, 0.35);
       transition: transform 0.12s ease, box-shadow 0.12s ease;
     }
 
     button.main-btn:hover {
       transform: translateY(-1px);
-      box-shadow: 0 14px 30px rgba(79, 70, 229, 0.4);
+      box-shadow: 0 14px 30px rgba(120, 170, 255, 0.45);
     }
 
     button.main-btn:active {
       transform: translateY(0);
-      box-shadow: 0 8px 18px rgba(79, 70, 229, 0.25);
+      box-shadow: 0 8px 18px rgba(120, 170, 255, 0.28);
     }
 
     .error {
-      color: #b91c1c;
+      color: #e11d48;
       font-size: 12px;
       margin-top: 8px;
     }
@@ -120,48 +127,45 @@
 
     .carrier-pill {
       flex: 0 0 auto;
-      border-radius: 999px;
-      border: 1px solid #e5e7eb;
-      padding: 6px 12px;
-      font-size: 11px;
-      background: #f9fafb;
+      border-radius: 20px;
+      border: 1px solid #d6e8ff;
+      padding: 6px 14px;
+      font-size: 12px;
+      background: #f3f8ff;
       display: inline-flex;
       align-items: center;
-      gap: 4px;
+      gap: 6px;
       cursor: pointer;
       color: #4b5563;
       transition: all 0.15s ease;
       white-space: nowrap;
     }
 
-    .carrier-pill span.icon {
-      font-size: 13px;
-    }
-
     .carrier-pill.active {
-      background: #4b7bec;
-      color: #eff6ff;
-      border-color: #4b7bec;
-      box-shadow: 0 6px 16px rgba(75, 123, 236, 0.35);
+      background: #77baff;
+      color: #ffffff;
+      border-color: #77baff;
+      box-shadow: 0 6px 16px rgba(80, 150, 255, 0.35);
     }
 
     .carrier-pill:hover {
       transform: translateY(-1px);
+      background: #e1f0ff;
     }
 
     .hint-text {
       font-size: 11px;
-      color: #9ca3af;
+      color: #8aa3c0;
       margin: 2px 0 0;
     }
 
     .result-card {
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle at top left, #f9fafb, #eef2ff 40%, #f3f4f6 100%);
-      border-radius: 18px;
-      border: 1px solid #e5e7eb;
-      padding: 14px 14px 10px;
+      background: linear-gradient(145deg, #f9fcff, #eef6ff);
+      border-radius: 20px;
+      border: 1px solid #d7e7ff;
+      padding: 16px;
       display: flex;
       flex-direction: column;
     }
@@ -169,29 +173,30 @@
     .result-header {
       font-size: 13px;
       color: #4b5563;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
-    .result-header span.em {
-      font-weight: 600;
+    .result-header .em {
+      font-weight: 700;
+      color: #3c7fe4;
     }
 
-    /* iframe 래퍼: 더 크고 세로 2배 길게 */
+    /* iframe wrapper */
     .frame-wrapper {
       position: relative;
       flex: 1;
-      border-radius: 14px;
+      border-radius: 16px;
       overflow: hidden;
-      background: #111827;
-      min-height: 900px; /* 세로 2배 느낌으로 길게 */
+      background: #e2efff;
+      min-height: 900px;
+      border: 1px solid #c9ddff;
     }
 
-    /* 내부 페이지 축소해서 보여주기 (줌아웃 효과) */
     .frame-scale {
       width: 125%;
       height: 125%;
       border: none;
-      background: #111827;
+      background: #e2efff;
       transform: scale(0.8);
       transform-origin: top left;
     }
@@ -208,65 +213,36 @@
 
     @media (max-width: 600px) {
       body { padding: 16px; }
-      .container { padding: 18px; }
+      .container { padding: 20px; }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <!-- 왼쪽: 입력 폼 -->
     <div class="form-area">
       <h2>배송 조회</h2>
-      <p class="subtitle">택배사와 운송장 번호를 입력하면, 오른쪽 영역에서 바로 조회 화면을 볼 수 있어요.</p>
+      <p class="subtitle">택배사와 운송장 번호를 입력해 주세요.</p>
 
       <label>택배사 선택</label>
       <div class="carrier-row" id="carrierRow">
-        <button class="carrier-pill active"
-                data-short="CJ"
-                data-full="CJ대한통운"
-                data-url="https://trace.cjlogistics.com/next/tracking.html?wblNo=">
-          <span class="icon">📦</span>
-          CJ
-        </button>
-        <button class="carrier-pill"
-                data-short="로젠"
-                data-full="로젠택배"
-                data-url="https://www.ilogen.com/web/personal/trace/">
-          <span class="icon">📮</span>
-          로젠
-        </button>
-        <button class="carrier-pill"
-                data-short="한진"
-                data-full="한진택배"
-                data-url="https://www.hanjin.com/kor/CMS/DeliveryMgr/WaybillResult.do?mCode=MN038&schLang=KR&wblnumText2=">
-          <span class="icon">🚚</span>
-          한진
-        </button>
-        <button class="carrier-pill"
-                data-short="우체국"
-                data-full="우체국택배"
-                data-url="https://service.epost.go.kr/trace.RetrieveDomRigiTraceList.comm?sid1=">
-          <span class="icon">🏤</span>
-          우체국
-        </button>
+        <button class="carrier-pill active" data-full="CJ대한통운" data-url="https://trace.cjlogistics.com/next/tracking.html?wblNo=">📦 CJ</button>
+        <button class="carrier-pill" data-full="로젠택배" data-url="https://www.ilogen.com/web/personal/trace/">📮 로젠</button>
+        <button class="carrier-pill" data-full="한진택배" data-url="https://www.hanjin.com/kor/CMS/DeliveryMgr/WaybillResult.do?mCode=MN038&schLang=KR&wblnumText2=">🚚 한진</button>
+        <button class="carrier-pill" data-full="우체국택배" data-url="https://service.epost.go.kr/trace.RetrieveDomRigiTraceList.comm?sid1=">🏤 우체국</button>
       </div>
 
       <label for="tracking">운송장 번호</label>
-      <input type="text" id="tracking" placeholder="운송장 번호를 입력하세요 (숫자만)" />
-      <p class="hint-text">예: 123456789012 (Enter 키로도 조회 가능)</p>
+      <input type="text" id="tracking" placeholder="숫자만 입력하세요" />
+      <p class="hint-text">예: 123456789012</p>
 
-      <button class="main-btn" onclick="track()">
-        <span>조회하기</span>
-      </button>
-
+      <button class="main-btn" onclick="track()">조회하기</button>
       <p id="error" class="error" style="display:none;"></p>
     </div>
 
-    <!-- 오른쪽: 결과 영역 -->
     <div class="result-area">
       <div class="result-card">
         <div id="resultHeader" class="result-header">
-          아직 조회 전입니다. 운송장 번호를 입력한 뒤 왼쪽의 <span class="em">조회하기</span> 버튼을 눌러주세요.
+          아직 조회 전입니다. 운송장 번호를 입력한 뒤 조회해주세요.
         </div>
         <div id="frameWrapper" class="frame-wrapper">
           <iframe id="resultFrame" class="frame-scale"></iframe>
@@ -276,13 +252,12 @@
   </div>
 
   <script>
-    const carrierRow    = document.getElementById('carrierRow');
-    const errorEl       = document.getElementById('error');
-    const resultHeader  = document.getElementById('resultHeader');
-    const resultFrame   = document.getElementById('resultFrame');
+    const carrierRow = document.getElementById('carrierRow');
+    const resultHeader = document.getElementById('resultHeader');
+    const resultFrame = document.getElementById('resultFrame');
+    const errorEl = document.getElementById('error');
     const trackingInput = document.getElementById('tracking');
 
-    // 택배사 선택
     carrierRow.addEventListener('click', (e) => {
       const btn = e.target.closest('.carrier-pill');
       if (!btn) return;
@@ -291,61 +266,38 @@
     });
 
     function validateTracking(num) {
-      const onlyDigits = num.replace(/\s+/g, '');
-      if (!onlyDigits) {
-        return '운송장 번호를 입력해주세요.';
-      }
-      if (!/^\d{8,15}$/.test(onlyDigits)) {
-        return '운송장 번호는 숫자 8~15자리로 입력해주세요.';
-      }
+      const digits = num.replace(/\s+/g, '');
+      if (!digits) return '운송장 번호를 입력해주세요.';
+      if (!/^\d{8,15}$/.test(digits)) return '운송장 번호는 숫자 8~15자리로 입력해주세요.';
       return '';
-    }
-
-    function getSelectedCarrier() {
-      return document.querySelector('.carrier-pill.active');
     }
 
     function track() {
       errorEl.style.display = 'none';
 
       const raw = trackingInput.value.trim();
-      const errMsg = validateTracking(raw);
-      if (errMsg) {
-        errorEl.textContent = errMsg;
+      const msg = validateTracking(raw);
+      if (msg) {
+        errorEl.textContent = msg;
         errorEl.style.display = 'block';
         resultHeader.textContent = '입력값을 다시 확인해주세요.';
         resultFrame.src = '';
         return;
       }
 
-      const onlyDigits = raw.replace(/\s+/g, '');
-      const carrierBtn = getSelectedCarrier();
-      if (!carrierBtn) {
-        errorEl.textContent = '택배사를 선택해주세요.';
-        errorEl.style.display = 'block';
-        resultHeader.textContent = '택배사를 선택한 뒤 다시 조회해 주세요.';
-        resultFrame.src = '';
-        return;
-      }
-
+      const digits = raw.replace(/\s+/g, '');
+      const carrierBtn = document.querySelector('.carrier-pill.active');
       const fullName = carrierBtn.dataset.full;
-      const baseUrl  = carrierBtn.dataset.url;
-      const fullUrl  = baseUrl + encodeURIComponent(onlyDigits);
+      const baseUrl = carrierBtn.dataset.url;
 
-      resultHeader.innerHTML = `<span class="em">${fullName}</span> 배송 조회 화면입니다. 아래에서 바로 확인할 수 있어요.`;
+      resultHeader.innerHTML = `<span class="em">${fullName}</span> 배송 조회 화면입니다.`;
 
-      // iframe에 해당 택배사 조회 페이지 로드
-      resultFrame.src = fullUrl;
+      resultFrame.src = baseUrl + encodeURIComponent(digits);
     }
 
-    // Enter 키로도 조회
-    trackingInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        track();
-      }
+    trackingInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter') track();
     });
   </script>
 </body>
 </html>
-
-
