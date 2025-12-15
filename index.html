@@ -221,14 +221,13 @@
   <div class="container">
     <div class="form-area">
       <h2>배송 조회</h2>
-      <p class="subtitle">택배사와 운송장 번호를 입력해 주세요.</p>
 
-      <label>택배사 선택</label>
+      <label>택배사</label>
       <div class="carrier-row" id="carrierRow">
-        <button class="carrier-pill active" data-full="CJ대한통운" data-url="https://trace.cjlogistics.com/next/tracking.html?wblNo=">📦 CJ</button>
-        <button class="carrier-pill" data-full="로젠택배" data-url="https://www.ilogen.com/web/personal/trace/">📮 로젠</button>
-        <button class="carrier-pill" data-full="한진택배" data-url="https://www.hanjin.com/kor/CMS/DeliveryMgr/WaybillResult.do?mCode=MN038&schLang=KR&wblnumText2=">🚚 한진</button>
-        <button class="carrier-pill" data-full="우체국택배" data-url="https://service.epost.go.kr/trace.RetrieveDomRigiTraceList.comm?sid1=">🏤 우체국</button>
+        <button class="carrier-pill active" data-full="CJ대한통운" data-url="https://trace.cjlogistics.com/next/tracking.html?wblNo=">CJ</button>
+        <button class="carrier-pill" data-full="로젠택배" data-url="https://www.ilogen.com/web/personal/trace/">로젠</button>
+        <button class="carrier-pill" data-full="한진택배" data-url="https://www.hanjin.com/kor/CMS/DeliveryMgr/WaybillResult.do?mCode=MN038&schLang=KR&wblnumText2=">한진</button>
+        <button class="carrier-pill" data-full="우체국택배" data-url="https://service.epost.go.kr/trace.RetrieveDomRigiTraceList.comm?sid1=">우체국</button>
       </div>
 
       <label for="tracking">운송장 번호</label>
@@ -242,7 +241,7 @@
     <div class="result-area">
       <div class="result-card">
         <div id="resultHeader" class="result-header">
-          아직 조회 전입니다. 운송장 번호를 입력한 뒤 조회해주세요.
+          아직 조회 전입니다.
         </div>
         <div id="frameWrapper" class="frame-wrapper">
           <iframe id="resultFrame" class="frame-scale"></iframe>
@@ -301,3 +300,4 @@
   </script>
 </body>
 </html>
+
